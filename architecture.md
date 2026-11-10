@@ -267,7 +267,12 @@ Use Node.js compatible with the pinned Next.js version and pnpm 12.16.1. The opt
 Python validation script requires Python 3.11+ and HTTPS access. No API key is
 needed for the default public feed. `package.json` pins pnpm through its
 `packageManager` field. Commit `pnpm-lock.yaml` and use
-`pnpm install --frozen-lockfile` in CI.
+`pnpm install --frozen-lockfile` in CI. `pnpm-workspace.yaml` retains a
+24-hour minimum release age and verifies the lockfile. It lists exact-version
+exceptions for the pinned Next.js 16.4.6 family, Rolldown 1.2.18 family and
+Vite 8.3.7 so a clean deployment can install them during their initial release
+window. These exceptions do not cover future versions and can be removed after
+the window has elapsed.
 
 Copy `.env.example` to `.env.local` to override defaults, then restart the server.
 
