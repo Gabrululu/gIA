@@ -153,7 +153,7 @@ export function recommend(
 
   const perLegMax = legs[0]?.maxPayoutUsd ?? 0;
   const summary =
-    `If rental rates (SICI) settle above ${strike} pts (${(strikePctActual * 100).toFixed(1)}% above today's ${S0}), ` +
+    `If rental rates (SICI) settle above ${strike} pts (${(strikePctActual * 100).toFixed(1)}% above today's ${Number(S0.toFixed(4))}), ` +
     `GIA pays up to ${usd(perLegMax)} per monthly option (${usd(maxPayoutUsd)} across ${legs.length} ` +
     `option${legs.length > 1 ? "s" : ""}), reaching the maximum at ${cap} pts. ` +
     `Your worst case is the premium: about ${usd(premiumUsd)}.`;

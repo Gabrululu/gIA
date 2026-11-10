@@ -35,7 +35,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <footer className="mt-24 border-t border-border">
         <div className="mx-auto flex max-w-7xl flex-col gap-6 px-5 py-10 md:flex-row md:items-end md:justify-between md:px-10">
           <Link href="/" className="display text-8xl text-steel">gIA</Link>
-          <p className="max-w-md text-sm text-muted-foreground">GPU Insurance Agent. Simulated testnet prototype. SICI uses fixture data; premiums are model estimates, not quotes. Not financial advice.</p>
+          <p className="max-w-md text-sm text-muted-foreground">GPU Insurance Agent. Simulated testnet prototype. SICI uses a live oracle when available, with labelled example data as fallback. Premiums are model estimates, not quotes. Not financial advice.</p>
         </div>
       </footer>
     </body>

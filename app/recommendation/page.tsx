@@ -1,3 +1,4 @@
+import SiciReference from "@/components/SiciReference";
 import Link from "next/link";
 import { Suspense } from "react";
 import BasisBadge from "@/components/BasisBadge";
@@ -5,7 +6,7 @@ import CopyLink from "@/components/CopyLink";
 import PayoffChart from "@/components/PayoffChart";
 import { parseInput, toSearchParams, type RawParams } from "@/lib/params";
 import { PROFILES, recommend, scenario, usd, type ProfileId } from "@/lib/recommend";
-import { getSiciPrint } from "@/lib/sici";
+import { getSiciPrint } from "@/lib/sici-feed";
 import { MIX_KEYS, MIX_LABELS } from "@/lib/sici";
 
 export const metadata = { title: "Your hedge — GIA" };
@@ -53,9 +54,7 @@ async function Content({ searchParams }: { searchParams: Promise<RawParams> }) {
 
       <section className="rounded-2xl border border-plum/40 bg-primary/5 p-6">
         <p className="text-lg leading-relaxed">{rec.summary}</p>
-        <p className="mt-3 text-xs text-muted-foreground">
-          SICI level used: <strong className="text-fg">{S0} pts</strong> ({sici.source === "fixture" ? "FIXTURE, not live" : "live"}). {sici.note}
-        </p>
+        <div className="mt-4"><SiciReference sici={sici} /></div>
       </section>
 
       <section className="grid gap-3 sm:grid-cols-4">

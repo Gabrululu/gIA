@@ -39,3 +39,18 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Documented configuration, without secrets
+!.env.example
+
+# Local agent instructions and workspace configuration
+AGENTS.md
+AGENTS.override.md
+CLAUDE.md
+.agents/
+.codex/
+.aws/
+
+# Internal research, integration requests, and construction notes
+/docs/validation/
+/options-integration.md

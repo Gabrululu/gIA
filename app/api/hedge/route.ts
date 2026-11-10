@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { getAdapter, legToOrder } from "@/lib/adapter";
 import { parseInput } from "@/lib/params";
 import { recommend } from "@/lib/recommend";
-import { getSiciPrint } from "@/lib/sici";
+import { getSiciPrint } from "@/lib/sici-feed";
 
 /**
  * POST { query: "spend=...&mix=...&h=..." }
@@ -27,7 +27,7 @@ export async function POST(req: Request) {
     const status = await adapter.status();
     const fills = [];
     for (const leg of rec.legs) fills.push(await adapter.place(legToOrder(leg)));
-    return NextResponse.json({ status, fills });
+    return NextResponse.json({ status, fills, sici }, { headers: { "Cache-Control": "no-store" } });
   } catch (e) {
     return NextResponse.json(
       { error: e instanceof Error ? e.message : "Execution failed." },

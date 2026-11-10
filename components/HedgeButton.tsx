@@ -1,13 +1,15 @@
 "use client";
 
 import { useState } from "react";
+import SiciReference from "./SiciReference";
+import type { SiciPrint } from "@/lib/sici";
 
 interface Fill {
   orderId: string; simulated: boolean; premiumUsd: number; maxPayoutUsd: number;
   collateralLockedByWriterUsd: number; txHash: string | null; note: string;
   order: { strike: number; cap: number; expiry: string; contracts: number };
 }
-interface Result { status: { adapter: string; live: boolean; detail: string }; fills: Fill[] }
+interface Result { sici: SiciPrint; status: { adapter: string; live: boolean; detail: string }; fills: Fill[] }
 
 const usd = (n: number) => n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 
@@ -42,6 +44,8 @@ export default function HedgeButton({ query }: { query: string }) {
           <div className="rounded-lg border border-warn/50 bg-warn/10 p-4 text-sm text-warn">
             <strong>SIMULATED.</strong> {result.status.detail}
           </div>
+          <p className="text-xs text-muted-foreground">Recalculated using the reference below at simulation time. Values may differ from the preview.</p>
+          <SiciReference sici={result.sici} />
           {result.fills.map((f) => (
             <div key={f.orderId} className="rounded-lg border border-line bg-panel p-4 text-sm tabular-nums">
               <div className="flex flex-wrap items-center justify-between gap-2">

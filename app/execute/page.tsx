@@ -1,3 +1,4 @@
+import SiciReference from "@/components/SiciReference";
 import Link from "next/link";
 import { Suspense } from "react";
 import HedgeButton from "@/components/HedgeButton";
@@ -6,7 +7,7 @@ import { TESTNET } from "@/lib/adapter/types";
 import { parseInput, toSearchParams, type RawParams } from "@/lib/params";
 import { recommend, usd } from "@/lib/recommend";
 import { planRolloverPolicy } from "@/lib/rollover";
-import { getSiciPrint } from "@/lib/sici";
+import { getSiciPrint } from "@/lib/sici-feed";
 
 export const metadata = { title: "Execute — GIA" };
 
@@ -43,7 +44,8 @@ async function Content({ searchParams }: { searchParams: Promise<RawParams> }) {
         <p className="mt-2 text-muted-foreground">This is the Oct-2026 Options primitive (fully collateralized, cash-settled European options), not Injective&apos;s older Binary Options (0–1 event) markets.</p>
       </section>
 
-      <HedgeButton query={query} />
+      <SiciReference sici={sici} />
+      {status.adapter === "mock-testnet" ? <HedgeButton query={query} /> : <p role="status" className="text-warn">Execution unavailable until the Options interface and series are verified.</p>}
 
       <section className="space-y-3 rounded-xl border border-line bg-panel p-5 text-sm">
         <h2 className="font-semibold">Auto-roll (design only, not built)</h2>

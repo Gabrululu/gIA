@@ -13,7 +13,7 @@ export class MockTestnetAdapter implements OptionsAdapter {
       adapter: "mock-testnet",
       live: false,
       detail:
-        "Simulated. Injective's Options announcement says testnet is live for whitelisted participants, but we found no public API docs for placing options orders yet.",
+        "Simulated execution. SICI may use a live oracle, but Options series, quotes and order placement are not yet verified for gIA.",
     };
   }
 

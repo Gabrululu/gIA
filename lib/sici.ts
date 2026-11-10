@@ -74,6 +74,9 @@ export interface SiciPrint {
   source: "fixture" | "live";
   /** Human-readable provenance, shown in the UI. */
   note: string;
+  /** Network providing the observation; absent for standalone fixtures. */
+  network?: "testnet" | "mainnet";
+  fallbackReason?: "disabled" | "unavailable";
 }
 
 /**
@@ -95,29 +98,3 @@ export const SICI_FIXTURE: SiciPrint = {
  * No SICI vol history was available to us — replace with real realised/implied vol.
  */
 export const ASSUMED_ANNUAL_VOL = 0.45;
-
-/**
- * HOOK to replace the fixture with a live print.
- *
- * TODO(live-feed): options for a real print, in order of preference:
- *  1. Query the SICI market on Injective testnet/mainnet (oracle price of the
- *     SICI perpetual market) via @injectivelabs/sdk-ts (IndexerGrpcDerivativesApi
- *     / ChainGrpcOracleApi). Market ticker/ID is not documented in the pages we
- *     read — look it up in the Injective Hub / indexer markets list.
- *  2. Ask LO:TECH for the feed: data@lo.tech (see their SICI post).
- * Must return the 7-day-average level, i.e. the settlement-relevant number.
- */
-export async function fetchLiveSici(): Promise<SiciPrint | null> {
-  return null;
-}
-
-/** Live print when available, otherwise the clearly-labelled fixture. */
-export async function getSiciPrint(): Promise<SiciPrint> {
-  try {
-    const live = await fetchLiveSici();
-    if (live) return live;
-  } catch {
-    // fall through to fixture
-  }
-  return SICI_FIXTURE;
-}

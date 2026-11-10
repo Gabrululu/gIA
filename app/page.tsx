@@ -1,6 +1,9 @@
+import { Suspense } from "react";
+import { getSiciPrint } from "@/lib/sici-feed";
+import SiciReference from "@/components/SiciReference";
 import Link from "next/link";
 import Image from "next/image";
-import { SICI_CHIPS, SICI_WEIGHTS, SICI_FIXTURE } from "@/lib/sici";
+import { SICI_CHIPS, SICI_WEIGHTS } from "@/lib/sici";
 import { PROFILES } from "@/lib/recommend";
 const signedPct = (n: number) => `+${Math.round(n * 100)}%`;
 
@@ -72,8 +75,7 @@ export default function Landing() {
               <p className="mt-6 max-w-md text-steel">
                 A physical GPU-rental index (USD per GPU-hour) built by LO:TECH and listed on Injective. Trailing 7-day average, 19:00 UTC daily fixing, each chip rebased to 100 on 22 Jul 2026.
               </p>
-              <p className="display mt-10 text-8xl">{SICI_FIXTURE.level}<span className="ml-2 text-2xl text-steel">pts</span></p>
-              <p className="mt-2 font-mono text-[0.7rem] uppercase tracking-widest text-mauve">Fixture, not live: example level from Injective&apos;s Options launch post</p>
+              <Suspense fallback={<p className="mt-10 text-steel" role="status">Loading SICI reference…</p>}><LiveIndex /></Suspense>
             </div>
             <ul className="self-end">
               {SICI_CHIPS.map((c) => (
@@ -116,4 +118,10 @@ export default function Landing() {
       </section>
     </div>
   );
+}
+
+
+async function LiveIndex() {
+  const sici = await getSiciPrint();
+  return <div className="mt-10 rounded-lg bg-card p-4 text-foreground"><SiciReference sici={sici} /></div>;
 }
