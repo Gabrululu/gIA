@@ -1,0 +1,210 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * gIA design system — editorial, studio-like (inspired by allerstudio.com):
+ * oversized serif display type, thin hairline rules, numbered sections, generous space.
+ * Palette: wine 36151E · plum 593F62 · mauve 7B6D8D · steel 8499B1 · ice A5C4D4.
+ */
+
+@theme inline {
+  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-wine: var(--wine);
+  --color-plum: var(--plum);
+  --color-mauve: var(--mauve);
+  --color-steel: var(--steel);
+  --color-ice: var(--ice);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --color-bad: var(--bad);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 0.25rem;
+  --wine: oklch(0.249 0.054 4.6);
+  --plum: oklch(0.411 0.065 317.2);
+  --mauve: oklch(0.559 0.051 304.7);
+  --steel: oklch(0.675 0.043 251.9);
+  --ice: oklch(0.803 0.04 230.3);
+
+  --background: oklch(0.9 0.025 230.3);
+  --foreground: var(--wine);
+  --card: oklch(0.94 0.018 230.3);
+  --card-foreground: var(--wine);
+  --popover: oklch(0.96 0.012 230.3);
+  --popover-foreground: var(--wine);
+  --primary: var(--wine);
+  --primary-foreground: oklch(0.94 0.018 230.3);
+  --secondary: var(--steel);
+  --secondary-foreground: var(--wine);
+  --muted: var(--ice);
+  --muted-foreground: oklch(0.42 0.05 317.2);
+  --accent: oklch(0.8 0.04 230.3);
+  --accent-foreground: var(--wine);
+  --destructive: oklch(0.55 0.17 18);
+  --destructive-foreground: oklch(0.97 0 0);
+  --border: oklch(0.249 0.054 4.6 / 18%);
+  --input: oklch(0.249 0.054 4.6 / 30%);
+  --ring: var(--plum);
+
+  /* semantic status — tuned to sit inside the palette */
+  --ok: oklch(0.5 0.1 165);
+  --warn: oklch(0.55 0.12 60);
+  --bad: oklch(0.52 0.17 18);
+
+  --gradient-hero: radial-gradient(110% 80% at 90% 0%, oklch(0.675 0.043 251.9 / 45%), transparent 60%),
+    radial-gradient(90% 70% at 0% 100%, oklch(0.559 0.051 304.7 / 14%), transparent 60%);
+
+  --chart-1: var(--ice);
+  --chart-2: var(--steel);
+  --chart-3: var(--mauve);
+  --chart-4: var(--plum);
+  --chart-5: var(--warn);
+  --sidebar: var(--card);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--accent-foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    color-scheme: light;
+  }
+  body {
+    background-color: var(--color-background);
+    background-image: var(--gradient-hero);
+    background-attachment: fixed;
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: var(--ice);
+    color: var(--wine);
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+@utility display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--plum);
+}
+
+@utility panel {
+  background: oklch(0.96 0.012 230.3 / 55%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(8px);
+}
+
+@utility num {
+  font-variant-numeric: tabular-nums;
+}
+
+@utility rise {
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@utility marquee {
+  animation: marquee 40s linear infinite;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Domain screen tokens mapped to the shared visual system. */
+:root {
+  --bg: var(--background);
+  --panel: var(--card);
+  --panel-2: var(--ice);
+  --line: var(--border);
+  --fg: var(--foreground);
+  --accent-ink: var(--primary-foreground);
+}
+@theme inline {
+  --color-bg: var(--background);
+  --color-panel: var(--card);
+  --color-panel2: var(--ice);
+  --color-line: var(--border);
+  --color-fg: var(--foreground);
+}
+.workflow h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.5rem, 6vw, 5rem); line-height: 1; }
+.workflow h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.8rem; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; scroll-behavior: auto !important; }
+}
