@@ -54,3 +54,6 @@ CLAUDE.md
 # Internal research, integration requests, and construction notes
 /docs/validation/
 /options-integration.md
+
+# Local pnpm cache
+.pnpm-store/

@@ -263,9 +263,11 @@ rolls. There is no scheduler, active grant or agent key in this prototype.
 
 ## Configuration and development
 
-Use Node.js compatible with the pinned Next.js version and npm. The optional
+Use Node.js compatible with the pinned Next.js version and pnpm 12.16.1. The optional
 Python validation script requires Python 3.11+ and HTTPS access. No API key is
-needed for the default public feed.
+needed for the default public feed. `package.json` pins pnpm through its
+`packageManager` field. Commit `pnpm-lock.yaml` and use
+`pnpm install --frozen-lockfile` in CI.
 
 Copy `.env.example` to `.env.local` to override defaults, then restart the server.
 
@@ -279,12 +281,12 @@ For deterministic offline demonstrations use `GIA_SICI_MODE=fixture`. The feed
 accepts only its fixed endpoints; there is no browser-controlled URL override.
 
 ```bash
-npm run dev          # Development server on port 3000
-npm test             # Domain, feed and API checks
-npm run lint
-npm run typecheck
-npm run build        # Production build using Webpack
-npm start            # Serve the production build
+pnpm dev              # Development server on port 3000
+pnpm test             # Domain, feed and API checks
+pnpm lint
+pnpm typecheck
+pnpm build            # Production build using Webpack
+pnpm start            # Serve the production build
 ```
 
 Tests cover basket weights, pricing, sizing, shared URL inputs, basis risk,

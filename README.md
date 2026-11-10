@@ -23,8 +23,8 @@ renewal are still pending. This prototype is not financial advice.
 ## Try it locally
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 Open [localhost:3000](http://localhost:3000). No API keys are required for the
